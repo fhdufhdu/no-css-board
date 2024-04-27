@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  mariadb:
+    image: mariadb:11.2.3
+    volumes:
+      - ./mariadb/conf.d:/etc/mysql/conf.d
+      - ./mariadb/data:/var/lib/mysql
+      - ./mariadb/initdb.d:/docker-entrypoint-initdb.d
+    ports: 
+      - 3307:3306
+    restart: always
+    environment:
+      - MARIADB_DATABASE=no-css-board
+      - MARIADB_ROOT_PASSWORD=ncb12345)(*&^
+      - MARIADB_USER=nocssboard_backend
+      - MARIADB_PASSWORD=ncb12345)(*&^
+    networks:
+      - no_css_board
+
+  springboot:
+    depends_on:
+      - mariadb
+    build: ./backend
+    ports:
+     - 8080:8080
+    restart: always
+    networks:
+      - no_css_board
+
+networks:
+  no_css_board: {}
