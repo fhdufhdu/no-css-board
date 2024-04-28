@@ -18,7 +18,7 @@ services:
     networks:
       - no_css_board
 
-  springboot:
+  backend:
     depends_on:
       - mariadb
     build: ./backend
@@ -27,6 +27,17 @@ services:
     restart: always
     networks:
       - no_css_board
+  
+  frontend:
+    depends_on:
+      - backend
+    build: ./frontend
+    ports:
+     - 80:80
+    restart: always
+    networks:
+      - no_css_board
+
 
 networks:
   no_css_board: {}
