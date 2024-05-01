@@ -1,7 +1,7 @@
 if echo "$@" | grep -q "backend"; then 
     cd backend
     git pull origin main
-    ./gradlew clean && ./gradlew bootJar
+    ./gradlew clean && ./gradlew build && ./gradlew bootJar
     cd ..
 fi
 if echo "$@" | grep -q "frontend"; then 
